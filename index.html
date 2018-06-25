@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width, user-scalable=no"> <!--, minimal-ui-->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="full-screen" content="yes"/>
+    <meta name="screen-orientation" content="portrait"/>
+
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<!-- build:js -->
+
+<!-- endbuild -->
+
+<link href="css/myStyle.css" rel="stylesheet" type="text/css" />
+<script src="https://connect.facebook.net/en_US/fbinstant.6.0.js"></script>
+<!--<script src="js/mock/fbinstant.6.0.mock.js"></script>-->
+<script src="js/lib/pixi.min.js"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/preact/dist/preact.min.js"></script>-->
+<script src="js/lib/preact.min.js"></script>
+<script src="js/lib/matter.min.js"></script>
+<script src="js/utils/config.js"></script>
+<script src="js/utils/screen.js"></script>
+
+<script src="js/components/ui.js"></script>
+<script src="js/components/graphics.js"></script>
+
+<script src="js/ui/gui.js"></script>
+<script src="js/game/core.js"></script>
+<script src="js/app/app.js"></script>
+
+<script>
+    //Загрузку ресурсов можно производить параллельно
+    window.onload = function(){
+        FBInstant.initializeAsync().then(() => {
+            IMAGES.forEach(function (imgName, index) {
+                IMAGES[index] = config.resourcesPath + imgName + '.png';
+            });
+            PIXI.loader.add(IMAGES);
+            PIXI.loader.load(game.load);
+        });
+
+        //Показывать надпись для продолжения игры при возврате с паузы
+        FBInstant.onPause(()=>{
+            // game.pause();
+            Pause();
+        });
+        //Создать ярлык для быстрого запуска
+        // FBInstant.canCreateShortcutAsync().then(()=>{
+        //     console.log('canCreateShortcutAsync');
+        // })
+    }
+</script>
+<!--<div id="one">-->
+    <!--&lt;!&ndash;Hello&ndash;&gt;-->
+    <!--<Button>Button</Button>-->
+<!--</div>-->
+
+
+</body>
+</html>
